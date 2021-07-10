@@ -1,0 +1,26 @@
+[
+    {
+        "user_id": 1,
+        "title": "Example Title 1",
+        "description": "Example Description 1",
+        "priority": "high",
+        "category": "backlog",
+        "due_date": "2021-08-31 02:00:00"
+    },
+    {
+        "user_id": 1,
+        "title": "Example Title 2",
+        "description": "Example Description 2",
+        "priority": "medium",
+        "category": "todo",
+        "due_date": "2021-08-30 12:00:00"
+    },
+    {
+        "user_id": 2,
+        "title": "Example Title 3",
+        "description": "Example Description 3",
+        "priority": "high",
+        "category": "in progress",
+        "due_date": "2021-07-30 12:00:00"
+    }
+]
