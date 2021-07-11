@@ -1,15 +1,23 @@
 services:
-    db:
+    postgres:
         image: "postgres:11.2"
-        ports:
-          - "5431:5432"
+        ports: 
+            - "5431:5432"
+        env_file: .env
         environment:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: kanban_db
+          POSTGRES_USER: "${DB_USERNAME_DEV}"
+          POSTGRES_PASSWORD: "${DB_PASSWORD_DEV}"
+          POSTGRES_DB: "${DB_DATABASE_DEV}"
     web:
-        build: .
+        build: 
+            context: .
+            dockerfile: Dockerfile
+        env_file: .env
+        entrypoint: ["/bin/bash", "./server-entrypoint.sh"]
         volumes:
             - .:/usr/src/app
+            - /usr/src/app/node_modules
         ports: 
             - "3000:3000"
+        depends_on:
+            - postgres
