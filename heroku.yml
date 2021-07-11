@@ -8,6 +8,6 @@ build:
 release:
   image: web
   command:
-    - ./deployment-task.sh 
+    - bash deployment-task.sh 
 run:
   web: node index.js       
