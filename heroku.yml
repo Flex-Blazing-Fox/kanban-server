@@ -1,0 +1,16 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: DATABASE
+build:
+  docker:
+    web:  
+      build:
+        context: .
+        dockerfile: Dockerfile
+        env_file: .env
+release:
+  command:
+    - ./deployment-task.sh 
+run:
+  web: node index.js       

@@ -13,7 +13,7 @@ services:
             context: .
             dockerfile: Dockerfile
         env_file: .env
-        entrypoint: ["/bin/bash", "./server-entrypoint.sh"]
+        entrypoint: ["/bin/bash", "./deployment-task-dev.sh"]
         volumes:
             - .:/usr/src/app
             - /usr/src/app/node_modules
