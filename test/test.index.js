@@ -163,7 +163,7 @@ describe("Kanban API", () => {
         .request(server)
         .get("/task")
         .set("access_token", tokenUser1)
-        .end((_, response) => {console.log(response.body)
+        .end((_, response) => {
           ids = response.body.map((res) => res.id);
           response.should.have.status(200);
           response.body.should.be.a("array");
@@ -437,7 +437,6 @@ describe("Kanban API", () => {
           due_date: "",
         })
         .end((err, response) => {
-          console.log(response)
           response.should.have.status(400);
           response.body.should.be.a("object");
           response.body.should.have

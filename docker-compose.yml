@@ -1,0 +1,15 @@
+services:
+    db:
+        image: "postgres:11.2"
+        ports:
+          - "5431:5432"
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: kanban_db
+    web:
+        build: .
+        volumes:
+            - .:/usr/src/app
+        ports: 
+            - "3000:3000"
