@@ -6,3 +6,4 @@ COPY . .
 
 EXPOSE 3000
 
+CMD ["chmod", "a+x", "deployment-task.sh"]
