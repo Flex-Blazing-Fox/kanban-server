@@ -4,11 +4,7 @@ setup:
       as: DATABASE
 build:
   docker:
-    web:  
-      build:
-        context: .
-        dockerfile: Dockerfile
-        env_file: .env
+    web: Dockerfile
 release:
   command:
     - ./deployment-task.sh 
