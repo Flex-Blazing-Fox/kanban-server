@@ -30,7 +30,6 @@ class userController {
       },
     })
       .then((user) => {
-        console.log(user)
         if (user && bcrypt.compareSync(password, user.dataValues.password)) {
           const payload = {
             id: user.dataValues.id,
@@ -41,7 +40,10 @@ class userController {
           throw { name: "EMAIL / PASSWORD AUTHENTICATION FAIL" };
         }
       })
-      .catch((err) => next(err));
+      .catch((err) => {
+        console.log(err);
+        next(err);
+      });
   }
 }
 
