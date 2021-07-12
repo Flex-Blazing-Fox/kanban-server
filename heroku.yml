@@ -4,6 +4,4 @@ build:
 release:
   image: web
   command:
-    - bash deployment-task.sh 
-run:
-  web: node index.js       
+    - bash deployment-task.sh       
