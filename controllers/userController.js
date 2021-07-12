@@ -24,13 +24,13 @@ class userController {
   }
   static login(req, res, next) {
     const { email, password } = req.body;
-    console.log(req.body)
     User.findOne({
       where: {
         email: email,
       },
     })
       .then((user) => {
+        console.log(user)
         if (user && bcrypt.compareSync(password, user.dataValues.password)) {
           const payload = {
             id: user.dataValues.id,
