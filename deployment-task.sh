@@ -1,5 +1,6 @@
-npm install 
-npx sequelize db:migrate:undo:all
-npx sequelize db:migrate:all
-npx sequelize db:seed:undo:all
-npx sequelize db:seed:all
+npm install --only=prod
+echo $DATABASE_URL
+npx sequelize db:migrate:undo:all --env production
+npx sequelize db:migrate:all --env production
+npx sequelize db:seed:undo:all --env production
+npx sequelize db:seed:all --env production
