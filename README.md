@@ -37,7 +37,7 @@ None
         "first_name": "ari",
         "last_name": "juanda",
         "password": "your_password",
-        organization_id: 1
+        "organization_id": 1
     }
     ```
 * **Success Response**

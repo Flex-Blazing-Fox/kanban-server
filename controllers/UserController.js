@@ -18,7 +18,7 @@ class UserController {
       return res.status(201).json({
         user: {
           id: user.id,
-          name: user.full_name,
+          name: user.first_name + ' ' + user.last_name,
           email: user.email,
           organization_id: user.organization_id,
         },
@@ -51,14 +51,14 @@ class UserController {
 
       const payload = {
         id: user.id,
-        name: user.full_name,
+        name: user.first_name + ' ' + user.last_name,
         email: user.email,
         organization_id: user.organization_id,
       }
 
-      const token = generateToken(payload)
+      const access_token = generateToken(payload)
 
-      return res.status(200).json({ token, user: payload })
+      return res.status(200).json({ access_token, user: payload })
     } catch (err) {
       next(err)
     }
@@ -83,7 +83,7 @@ class UserController {
         return res.status(200).json({
           user: {
             id: updatedUser.id,
-            name: updatedUser.full_name,
+            name: updatedUser.first_name + ' ' + updatedUser.last_name,
             email: updatedUser.email,
             organization_id: updatedUser.organization_id,
           },
@@ -91,6 +91,60 @@ class UserController {
       }
 
       return next({ name: 'UserNotFoundError' })
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static async googleLogin(req, res, next) {
+    try {
+      const { id_token } = req.body
+      const ticket = await client.verifyIdToken({
+        idToken: id_token,
+        audience: process.env.CLIENT_ID,
+      })
+      const payload = ticket.getPayload()
+      const email = payload['email']
+      const name = payload['name']
+
+      const user = await User.findOne({ where: { email } })
+
+      if (!user) {
+        const newUser = await User.create({
+          email,
+          first_name: name,
+          password: process.env.DEFAULT_PASSWORD,
+          organization_id: 1,
+        })
+
+        const access_token = generateToken({
+          id: newUser.id,
+          name: newUser.first_name + ' ' + newUser.last_name,
+          email: newUser.email,
+          organization_id: newUser.organization_id,
+        })
+
+        return res.status(201).json({
+          access_token,
+          user: {
+            id: newUser.id,
+            name: newUser.first_name + ' ' + newUser.last_name,
+            email: newUser.email,
+            organization_id: newUser.organization_id,
+          },
+        })
+      }
+
+      const clientPayload = {
+        id: user.id,
+        name: user.first_name + ' ' + user.last_name,
+        email: user.email,
+        organization_id: user.organization_id,
+      }
+
+      const access_token = generateToken(clientPayload)
+
+      return res.status(200).json({ access_token, user: clientPayload })
     } catch (err) {
       next(err)
     }
