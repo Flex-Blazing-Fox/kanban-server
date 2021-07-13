@@ -36,6 +36,64 @@ class TaskController{
             next(err)
         })
     }
+
+    static findTaskById(req, res){
+        
+        let tasks = {
+            id: req.tasks.id,
+            title: req.tasks.title,
+            category: req.tasks.category,
+            userId:req.tasks.userId
+        }
+        
+        res.status(200).json(tasks)
+    }
+
+    static updateTask(req, res, next){
+        const { title, category } = req.body
+        const { tasks } = req
+
+        tasks.title = title
+        tasks.catch = category
+
+        tasks
+        .save()
+        .then(()=>{
+            res.status(201).json({tasks})
+        })
+        .catch(err =>{
+            next(err)
+        })
+    }
+
+    static updateCategory(req, res, next){
+        const { category } = req.body
+        const { tasks } = req
+
+        tasks.category = category
+
+        tasks
+        .save()
+        .then(() => {
+            res.status(200).json({tasks})
+        })
+        .catch(err => {
+            next(err)
+        })
+    }
+
+    static deleteTask(req, res, next){
+        const { tasks } = req
+
+        tasks
+        .destroy()
+        .then(() => {
+            res.status(200).json({"message":"Tasks Successfully Deleted"})
+        })
+        .then(err => {
+            next(err)
+        })
+    }
 }
 
 module.exports = TaskController

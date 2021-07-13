@@ -15,6 +15,10 @@ const errorHandler = (err, req, res, next) => {
             statusCode = 401
             error.push({"message":"Login Failed"})
             break;
+        case 'TASK_NOT_FOUND':
+            statusCode = 404
+            error.push({"message":"Tak Not Found"})
+            break;
         case 'USER_DATA_NOT_FOUND':
             statusCode = 404
             error.push({"message":"User Data Tidak Ditemukan"})
