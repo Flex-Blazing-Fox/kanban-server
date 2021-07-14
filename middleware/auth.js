@@ -12,7 +12,7 @@ const auth = (req,res,next)=>{
               if (!dataUser) {
                   throw {name:"Invalid Token"}
               }else{
-                req.userID = tokenDecode.id
+                req.userID = dataUser.id
                 next()
               }
             })
