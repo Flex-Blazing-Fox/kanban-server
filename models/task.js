@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {
+        notEmpty: {
+          args: true,
           msg: 'Title can not be empty'
         }
       }
@@ -29,7 +30,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {
+        notEmpty: {
+          args: true,
           msg: 'Category can not be null'
         }
       }

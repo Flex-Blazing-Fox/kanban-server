@@ -30,14 +30,27 @@ class TaskController{
         })
     }
 
+    
+    static putTask(req, res, next) {
+        const {task} = req
+        const {title,category} = req.body
+        task.dataValues.category = category
+        task.dataValues.title = title
+        task.save()
+        .then(task => {
+            res.status(200).json({data: task})
+        })
+        .catch(err => {
+            next(err)
+        })
+    }
+    
     static patchTask(req, res, next) {
         const {task} = req
         const {category} = req.body
-        //console.log(task.dataValues.category,"masuk")
         task.dataValues.category = category
         task.save()
         .then(task => {
-            // console.log(task,"masuk")
             res.status(200).json({data: task})
         })
         .catch(err => {

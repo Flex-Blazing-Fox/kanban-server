@@ -1,13 +1,27 @@
 const jwt = require('jsonwebtoken')
-const {Task} = require('../models')
+const {User,Task} = require('../models')
 
 const authentication = (req, res, next) => {
     if (!req.headers.access_token) return next( {name: "Missing access token"})
-
+    
     try{
-        const decoded = jwt.verify(req.headers.access_token, "secret")
-        req.userId = decoded.id
-        next()
+        const decoded = jwt.verify(req.headers.access_token, process.env.JWT_KEY)
+        User.findByPk(decoded.id)
+        
+        .then(user => {
+            console.log(user,">>>>")
+            if (!user){
+                throw {name: "JsonWebTokenError"}
+            } else {
+                req.userId = user.id
+                next()
+            }
+        })
+        .catch(err => {
+            next(err)
+        })
+        
+
     }
     catch(err) {
         next( {name: "Invalid access_token"})

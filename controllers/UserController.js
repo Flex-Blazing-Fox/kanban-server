@@ -28,7 +28,7 @@ class UserController {
                 const payload = {
                     id: user.id
                 }
-                const access_token = jwt.sign(payload, "secret")
+                const access_token = jwt.sign(payload, process.env.JWT_KEY)
                 res.status(200).json({success:true, access_token})
             } else {
                 throw {

@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     email: {
       type: DataTypes.STRING,
+      allowNull: {
+        args: false,
+        msg: "Email can not be null"
+      },
       unique: {
         args: true,
         msg: 'Email is already taken'
