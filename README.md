@@ -18,7 +18,7 @@
     5. Making **Pull Request** to dev and master branches also will trigger the **Github CI Workflow** and **Heroku kanban-server pipeline CD** so all Pull Request must be verified first
 
 ## Endpoints
-The resource for the endpoint is https://fancy-todo-dev.herokuapp.com or http://localhost:3000. You can use either Postman, curl, or REST API Client
+The resource for the endpoint is https://kanban-server-rangga.herokuapp.com, https://kanban-server-staging.herokuapp.com, or http://localhost:3000. You can use either Postman, curl, or REST API Client
 
 <img src=https://img.shields.io/badge/POST-%2Fuser%2Fregister-blueviolet width=162.5/>
 
