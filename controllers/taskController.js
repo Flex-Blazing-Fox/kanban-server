@@ -54,12 +54,12 @@ class TaskController{
         const { tasks } = req
 
         tasks.title = title
-        tasks.catch = category
+        tasks.category = category
 
         tasks
         .save()
         .then(()=>{
-            res.status(201).json({tasks})
+            res.status(201).json(tasks)
         })
         .catch(err =>{
             next(err)
@@ -75,7 +75,7 @@ class TaskController{
         tasks
         .save()
         .then(() => {
-            res.status(200).json({tasks})
+            res.status(200).json(tasks)
         })
         .catch(err => {
             next(err)

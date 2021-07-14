@@ -27,6 +27,10 @@ const errorHandler = (err, req, res, next) => {
             statusCode = 400
             error.push({"message":err.errors[0].message})
             break;
+        case'SequelizeUniqueConstraintError' : 
+            statusCode = 400
+            error.push({"message" : "Email telah terdaftar"})
+            break
         default:
             statusCode = 500
             error.push(err.name)

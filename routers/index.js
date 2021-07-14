@@ -3,9 +3,9 @@ const authentication = require('../middleware/auth')
 
 const router = require('express').Router()
 const taskRouters = require('./taskRouter')
+const userRouters = require('./userRouter')
 
-router.post("/register", UserController.register)
-router.post("/login", UserController.login)
+router.use("/users", userRouters)
 router.use("/tasks", authentication, taskRouters)
 
 
