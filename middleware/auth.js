@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const{Task} = require('../models')
+const{Task,user} = require('../models')
 const auth = (req,res,next)=>{
     if (!req.headers.access_token) {
         return next({name:'Invalid Token'})
@@ -7,8 +7,15 @@ const auth = (req,res,next)=>{
     else{
         try {
             const tokenDecode = jwt.verify(req.headers.access_token, process.env.JWT_KEY)
-            req.userID = tokenDecode.id
-            next()
+            user.findOne({where:{id:tokenDecode.id}})
+            .then(dataUser=>{
+              if (!dataUser) {
+                  throw {name:"Invalid Token"}
+              }else{
+                req.userID = tokenDecode.id
+                next()
+              }
+            })
           }
           catch (err) {
             next({name:'invalid access token'})
@@ -23,7 +30,7 @@ const author = (req,res,next)=>{
         if (!data){
           throw{name:'Task not found'}
         }else{
-          req.todo = data
+          req.Task = data
           next()
          }
       })
