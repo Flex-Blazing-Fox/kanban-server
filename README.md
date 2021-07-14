@@ -16,7 +16,7 @@
 - _Jalankan `nodemon app.js` untuk menjalankan applikasi server side._
  
 ## Available Endpoint _Kanban_
-  ----
+  
 _Users :_
 
 * `POST /register`
@@ -31,7 +31,7 @@ _Task :_
 * `DELETE /tasks/:id`
 
 ## RESTful Endpoint
-  ----
+ 
 ### User Register :
 
 > Buat / daftar user baru
