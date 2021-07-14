@@ -7,7 +7,7 @@ const errorHandler = require('../middlewares/errorHandler')
 
 router.use('/', userRouter)
 router.use(authentication)
-router.use('/task', taskRouter)
+router.use('/tasks', taskRouter)
 router.use(errorHandler)
 
 module.exports = router
