@@ -29,6 +29,6 @@ wss.on("connection", function connection(ws) {
 //   console.log(`listening to port ${PORT}`);
 // });
 
-server.listen(PORT, () => {
+module.exports = server.listen(PORT, () => {
   console.log(`listening to port ${PORT}`);
 });
