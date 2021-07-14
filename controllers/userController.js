@@ -1,6 +1,8 @@
 const { User } = require('../models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { OAtuh2Client } = require('google-auth-library')
+const client = new OAtuh2Client(process.env.GOOLGE_CLIENT_ID)
 
 class UserController{
     static register(req, res, next){
@@ -35,6 +37,42 @@ class UserController{
             .catch((err) => {
                 next(err)
             })
+    }
+
+    static googleLogin(req, res, next){
+        const { idToken } = req.body
+
+        let email
+        let statusCode = 200
+
+        client.verifyIdToken({
+            idToken,
+            audience: process.env.GOOLGE_CLIENT_ID
+        })
+            .then((ticket) => {
+                email = ticket.getPayload().email
+
+                return User.findOne({where:{email}})
+            })
+            .then(user => {
+                if(user){
+                    return user
+                }
+
+                statusCode = 201
+                return User.create({
+                    email,
+                    password:process.env.DEFAULT_PASSWORD
+                })
+            })
+            .then(user => {
+                const access_token = jwt.sign({id:user.id}, process.env.SECRET_KEY)
+                res.status(statusCode).json({access_token})
+            })
+            .catch(err => {
+                next(err)
+            })
+
     }
 }
 
