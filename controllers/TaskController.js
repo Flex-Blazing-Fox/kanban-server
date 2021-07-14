@@ -11,7 +11,7 @@ class TaskController{
         })
     }
 
-    static addTask (req, res, nex) {
+    static addTask (req, res, next) {
         const {title, category} = req.body
 
         Task.create(
@@ -29,6 +29,37 @@ class TaskController{
             next(err)
         })
     }
+
+    static patchTask(req, res, next) {
+        const {task} = req
+        const {category} = req.body
+        //console.log(task.dataValues.category,"masuk")
+        task.dataValues.category = category
+        task.save()
+        .then(task => {
+            // console.log(task,"masuk")
+            res.status(200).json({data: task})
+        })
+        .catch(err => {
+            next(err)
+        })
+    }
+
+    static deleteTask(req, res, next) {
+        const { id } = req.params
+        Task.destroy({
+            where: {id: +id},
+            returning: true,
+        })
+        .then(() => {
+            res.status(200).json({"message":"Task success to delete" })
+        })
+        .catch(err => {
+            next(err)
+        })
+    }    
+
+
 }
 
 module.exports = TaskController
