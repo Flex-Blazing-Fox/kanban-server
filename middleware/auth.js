@@ -7,13 +7,12 @@ const authentication = (req, res, next)=>{
     }
     try{
         const decoded = jwt.verify(req.headers.access_token, process.env.JWT_SECRET)
-        req.userId = decoded.userId
-        
         User.findOne({where:{
             id: decoded.userId
         }})
         .then(result=>{
             if(result){
+                req.userId = result.id
                 next() 
             }else{
                 throw{name: 'USER_NOT_FOUND'}
@@ -29,6 +28,7 @@ const authentication = (req, res, next)=>{
 }
 const authorization = (req, res, next)=>{
     const{id} = req.params
+    console.log(id);
     Task.findOne({
         where:{
             id, 

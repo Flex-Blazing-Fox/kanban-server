@@ -31,12 +31,14 @@ class TaskController{
         })
     }
     static addTask(req, res, next){
-        const { title, category } = req.body
-        Task.create({ title, category,  userId: req.userId})
+        const { title} = req.body
+        console.log(title);
+        Task.create({ title, category: 'Backlog',  userId: req.userId})
         .then(result => {
             res.status(201).json(result)
         })
         .catch(err => {
+            console.log(err);
             next(err)
         })
     }
@@ -55,6 +57,7 @@ class TaskController{
     static updateAll(req, res, next){
         const task = req.task
         const { title, category } = req.body
+
         Task.update({ title, category},
             {
                 where: {id:task.id},
