@@ -28,7 +28,6 @@ const authentication = (req, res, next)=>{
 }
 const authorization = (req, res, next)=>{
     const{id} = req.params
-    console.log(id);
     Task.findOne({
         where:{
             id, 

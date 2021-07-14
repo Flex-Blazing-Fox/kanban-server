@@ -44,9 +44,7 @@ class TaskController{
     }
     static delete(req, res, next){
         const task = req.task
-        Task.destroy({
-            where:{id: task.id}
-        })
+        task.destroy()
         .then(() => {
             res.status(200).json({message: "Success deleted task"})
         })
@@ -57,14 +55,12 @@ class TaskController{
     static updateAll(req, res, next){
         const task = req.task
         const { title, category } = req.body
+        task.title = title
+        task.category = category
 
-        Task.update({ title, category},
-            {
-                where: {id:task.id},
-                returning: true
-            })
+        task.save()
         .then(result => {
-            res.status(200).json(result[1])
+            res.status(200).json(result)
         })
         .catch(err => {
             next(err)
@@ -73,12 +69,11 @@ class TaskController{
     static updateCategory(req, res, next){
         const task = req.task
         const { category } = req.body
-        Task.update({category}, {
-            where: {id: task.id},
-            returning: true
-        })
+        task.category = category
+        
+        task.save()
         .then(result => {
-            res.status(200).json(result[1])
+            res.status(200).json(result)
         })
         .catch(err => {
             next(err)
