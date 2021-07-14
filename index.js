@@ -17,6 +17,7 @@ const server = require("http").createServer(app);
 const wss = new WebSocket.Server({ server: server });
 wss.on("connection", function connection(ws) {
   ws.on("message", function incoming(message) {
+    console.log(message)
     wss.clients.forEach(function each(client) {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
         client.send(message);
