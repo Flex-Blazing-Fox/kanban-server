@@ -2,7 +2,7 @@
 
 ## Usage
 
-- ### Development Version
+- ### Production Version
     The resource for already deployed production version is https://kanban-server-rangga.herokuapp.com. 
 
 - ### Development Version
