@@ -7,9 +7,7 @@ const authentication = (req, res, next) => {
     try{
         const decoded = jwt.verify(req.headers.access_token, process.env.JWT_KEY)
         User.findByPk(decoded.id)
-        
         .then(user => {
-            console.log(user,">>>>")
             if (!user){
                 throw {name: "JsonWebTokenError"}
             } else {
@@ -20,8 +18,6 @@ const authentication = (req, res, next) => {
         .catch(err => {
             next(err)
         })
-        
-
     }
     catch(err) {
         next( {name: "Invalid access_token"})

@@ -406,6 +406,98 @@ _Task :_
     ]
   }
   ```
+
+### Put Category :
+
+> Put task category
+
+* _URL_
+
+  ```
+  /tasks
+  ```
+
+* _Method_
+
+  ```
+  PUT
+  ```
+
+* _URL Params_
+
+  ```
+  id
+  ```
+
+* _Data Params_
+
+  ```
+  {
+    "title": req.body.title
+    "category": req.body.category
+  }
+  ```
+
+* _Response_
+
+  **Code 200** : Jika request berhasil
+
+  ```
+  {
+    "data": {
+        "id": 2,
+        "title": "cobacoba",
+        "category": "proses",
+        "createdAt": "2021-07-13T14:58:44.429Z",
+        "updatedAt": "2021-07-13T14:58:44.429Z",
+        "userId": 1
+    }
+  }
+  ```
+
+  **Code 400** : Validasi tidak terpenuhi,
+
+  Jika ada value attributes category berupa `empty` maka akan mengeluarkan error validasi sesuai attributenya
+
+  ```
+  {
+    "errors": [
+        "Validation notEmpty on category failed"
+    ]
+  }
+  ```
+
+  Jika ada value attributes category berupa `null` maka akan mengeluarkan error validasi sesuai attributenya
+
+  ```
+  {
+    "errors": [
+        "Title can not be null",
+        "Category can not be null"
+    ]
+  }
+  ```
+
+  **Code 404** : Jika task tidak ditemukan
+
+  ```
+  {
+    "errors": [
+      "Task not found"
+    ]
+  }
+  ```
+
+  **Code 500** : Jika request gagal karena server error
+
+  ```
+  {
+    "errors": [
+      "Internal server error"
+    ]
+  }
+  ```
+
 ### Delete task :
 
 > Delete task by id
