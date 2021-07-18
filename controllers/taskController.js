@@ -59,7 +59,6 @@ class taskController {
   }
   static updateTaskValue(req, res, next) {
     const { id } = req.params;
-    console.log(id);
     let tasks = getAuthorizedTasks(req, id);
     if (tasks) {
       Task.update(req.body, {
@@ -107,7 +106,7 @@ class taskController {
           if (err.name === "SequelizeValidationError") {
             next({
               name: "SEQUELIZE VALIDATION ERROR",
-              details: this.getValidationErrorDetails(err),
+              details: getValidationErrorDetails(err),
             });
           } else {
             next(err);
