@@ -6,7 +6,7 @@
 * _Pada file `.env` tersebut isi sesuai kebutuhan / database._
 * _`JWT_KEY` yaitu signature untuk generate token._
 * _`DB_USERNAME` yaitu username database._
-* _`DB_PASSWORD` yaitu password database._
+* _`DB_Password` yaitu Password database._
 * _Setelah itu jalankan `sequelize db:migrate` untuk migrasi ke database._
 * _Jalankan `nodemon app.js` untuk menjalankan aplikasi._
 
@@ -51,8 +51,8 @@ _Tasks_
 
   ```
   {
-    "email": req.body.email,
-    "password": req.body.password
+    "Email": req.body.Email,
+    "Password": req.body.Password
   }
   ```
 
@@ -65,7 +65,7 @@ _Tasks_
   ```
   {
     "id": req.body.id,
-    "email": req.body.email,
+    "Email": req.body.Email,
   }
 
   ```
@@ -80,8 +80,8 @@ _Tasks_
   {
     "err": [
         "Email must be not empty",
-        "Must be email format",
-        "password must be filled",
+        "Must be Email format",
+        "Password must be filled",
         "Password min 6 characters",
         "There must be a number"
     ]
@@ -97,18 +97,9 @@ _Tasks_
     "err": "Internal server error"
   }
   ```
-   **Code 400**
-
-  Jika email belum terdaftar
-
-  ```
-  {
-    "err": "Email not registered"
-  }
-  ```
   **Code 400**
 
-  Jika email telah terdaftar
+  Jika Email telah terdaftar
 
   ```
   {
@@ -140,8 +131,8 @@ _Tasks_
 
   ```
   {
-    "email": req.body.email,
-    "password": req.body.password
+    "Email": req.body.Email,
+    "Password": req.body.Password
   }
   ```
 
@@ -169,7 +160,7 @@ _Tasks_
   ```
    **Code 400**
 
-  Jika email belum terdaftar
+  Jika Email belum terdaftar
 
   ```
   {
@@ -444,7 +435,6 @@ _Tasks_
   jika ada value attributes tidak sesuai validasi
 
   ```
-  
     "err": {
       "Category must be filled"
     }
@@ -456,7 +446,6 @@ _Tasks_
   Jika task tidak ditemukan
 
   ```
-  
     "err": {
       "task not found"
     }
@@ -468,7 +457,6 @@ _Tasks_
   Jika request gagal karena server error
 
   ```
-  
     "err": {
       "Internal server error"
     }

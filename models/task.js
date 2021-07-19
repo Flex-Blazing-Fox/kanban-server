@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Task.belongsTo(models.user,{foreignKey:'userID'})
+      Task.belongsTo(models.User,{foreignKey:'userID'})
       // define association here
     }
   };
@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     Category:{
       type:DataTypes.STRING,
+      defaultValue:"Back Log",
       allowNull: false,
       validate:{
         notEmpty: true

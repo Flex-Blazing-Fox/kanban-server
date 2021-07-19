@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const{Task,user} = require('../models')
+const{Task,User} = require('../models')
 const auth = (req,res,next)=>{
     if (!req.headers.access_token) {
         return next({name:'Invalid Token'})
@@ -7,10 +7,10 @@ const auth = (req,res,next)=>{
     else{
         try {
             const tokenDecode = jwt.verify(req.headers.access_token, process.env.JWT_KEY)
-            user.findOne({where:{id:tokenDecode.id}})
+            User.findOne({where:{id:tokenDecode.id}})
             .then(dataUser=>{
               if (!dataUser) {
-                  throw {name:"Invalid Token"}
+                  throw {name:"User not found"}
               }else{
                 req.userID = dataUser.id
                 next()

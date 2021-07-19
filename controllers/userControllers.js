@@ -1,33 +1,37 @@
-const{user} = require('../models')
+const{ User } = require('../models')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-class userController{
+class UserController{
     static register(req,res,next){
-        const {email,password} = req.body
-        user.create({email,password})
+        const {Email,Password} = req.body
+        User.create({Email,Password})
         .then(data =>{
-            res.status(201).json({"message":"Account has been created","data":{id:data.id,email:data.email}})
+            res.status(201).json({"message":"Account has been created","data":{id:data.id,email:data.Email}})
         })
         .catch(err=>{
+            console.log(err);
             next(err)
         })
     }
 
     static login(req,res,next){
-        const {email,password} = req.body
-        user.findOne({
+        const {Email,Password} = req.body
+        User.findOne({
             where:{
-                email:email
+                Email:Email
             }
         })
         .then(result =>{
-            const comparePassword = bcrypt.compareSync(password,result.password)
+            console.log(result,"masuk");
+            const comparePassword = bcrypt.compareSync(Password,result.Password)
+            console.log(comparePassword,"masuk");
             if (result && comparePassword){
                 const payload ={id:result.id}
                 const access_token = jwt.sign(payload, process.env.JWT_KEY);
                 res.status(200).json({"message":"Login success",access_token:access_token})
             }
             else{
+                console.log("masuk");
                 throw {
                     name:'Login gagal'
                 }
@@ -38,4 +42,4 @@ class userController{
         })
     }
 }
-module.exports = userController
+module.exports = UserController

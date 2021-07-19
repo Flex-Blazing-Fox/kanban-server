@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const errorHandle = require('../helpers/errorHandler');
+const errorHandle = require('../middleware/errorHandler');
 const task = require('./taskRoutes')
 const user = require('./userRoute')
-const { auth } = require('../helpers/auth');
+const { auth } = require('../middleware/auth');
 
 
 router.use('/',user)

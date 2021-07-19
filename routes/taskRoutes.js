@@ -1,5 +1,5 @@
 const task = require('../controllers/taskControllers');
-const { author } = require('../helpers/auth');
+const { author } = require('../middleware/auth');
 const router = require('express').Router();
 
 router.get('/',task.listTask)

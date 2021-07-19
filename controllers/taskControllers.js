@@ -1,5 +1,6 @@
 const{Task} = require('../models')
-class Task{
+
+class TaskControllers{
     static listTask(req,res,next){
         Task.findAll()
         .then(result=>{
@@ -17,7 +18,7 @@ class Task{
     static putTask(req,res,next){
         const {title,Category} = req.body
         const {Task} = req
-
+        console.log({title,Category});
         Task.title = title
         Task.Category = Category
         Task.save()
@@ -66,4 +67,4 @@ class Task{
     }
 
 }
-module.exports = Task
+module.exports = TaskControllers

@@ -34,9 +34,13 @@ const errorHandle = (err,req,res,next)=>{
             statusCode = 500
             message = 'Internal server error'
             break;
-        case 'Todo not found':
+        case 'Task not found':
             statusCode = 404
-            message = 'Todo not found'
+            message = 'Task not found'
+            break;
+        case 'User not found':
+            statusCode = 404
+            message = 'User not found'
             break;
         default:
             break;

@@ -4,18 +4,18 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class user extends Model {
+  class User extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      user.hasMany(models.Task,{foreignKey:'userID'})
+      User.hasMany(models.Task,{foreignKey:'userID'})
       // define association here
     }
   };
-  user.init({
+  User.init({
     Email:{ 
       type:DataTypes.STRING,
       allowNull:{args:false,msg:"Email has to be not null"},
@@ -35,14 +35,14 @@ module.exports = (sequelize, DataTypes) => {
     } 
   },{
     hooks:{
-      beforeCreate:pass=>{
-        const salt = bcrypt.genSaltSync(11)
-        const hash = bcrypt.hashSync(pass.Password,salt)
-        pass.Password = hash
+    beforeCreate:(User,options)=>{
+        const salt = bcrypt.genSaltSync(9)
+        const hash = bcrypt.hashSync(User.Password,salt)
+        User.Password = hash
       }
     },
     sequelize,
-    modelName: 'user',
+    modelName: 'User',
   });
-  return user;
+  return User;
 };
