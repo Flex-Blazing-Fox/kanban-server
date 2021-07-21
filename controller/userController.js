@@ -10,7 +10,7 @@ class UserController{
             password   
         })
         .then(result=>{
-            res.status(201).json({result})
+            res.status(201).json({message: 'Successfully Register',email: result.email})
         })
         .catch(err=>{
             next(err)

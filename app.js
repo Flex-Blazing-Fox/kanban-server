@@ -4,8 +4,10 @@ const errHandler = require('../fancy-todo-server/middleware/errHandler')
 const app = express()
 const router = require('./router')
 const PORT = process.env.PORT || 3000
+const cors = require('cors')
 
-
+app.use(cors())
+app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(router)
 app.use(errHandler)

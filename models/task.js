@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     category: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: 'Backlog',
       validate: {
         notEmpty: {
           args: true,

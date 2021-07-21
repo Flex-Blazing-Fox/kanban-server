@@ -10,7 +10,7 @@ kanban_db
 
 ## Package
 ```
-bcrypt, dotenv, express, jsonwebtoken, nodemon, pg, sequelize
+bcrypt, dotenv, express, jsonwebtoken, nodemon, pg, sequelize, cors
 ```
 
 ## Migration
@@ -40,13 +40,7 @@ POST
 ```
 CODE: 201
 {
-    "result": {
-        "id": 1,
-        "email": "test@mail.com",
-        "password": "$2b$10$n2PvIv747U8WPsCmZUfZMucoWhQHWVcbDEWdXbUFwqidsXDkxSNjK",
-        "updatedAt": "2021-07-14T08:38:11.613Z",
-        "createdAt": "2021-07-14T08:38:11.613Z"
-    }
+    "email": "test@mail.com"
 }
 ```
 - **ERROR RESPONSE:**
