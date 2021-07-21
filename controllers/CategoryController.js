@@ -1,9 +1,9 @@
-const { Category } = require('../models')
+const { Category, Task } = require('../models')
 
 class CategoryController {
   static async getCategories(req, res, next) {
     try {
-      const categories = await Category.findAll()
+      const categories = await Category.findAll({ include: Task })
 
       return res.status(200).json(categories)
     } catch (err) {

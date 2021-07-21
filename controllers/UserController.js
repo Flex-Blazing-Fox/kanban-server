@@ -4,8 +4,8 @@ const { generateToken } = require('../helpers/jsonwebtoken')
 
 class UserController {
   static async register(req, res, next) {
-    const { email, first_name, last_name, password, organization_id } = req.body
-
+    let { email, first_name, last_name, password, organization_id } = req.body
+    
     try {
       const user = await User.create({
         email,

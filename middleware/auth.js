@@ -34,7 +34,7 @@ const authorize = async (req, res, next) => {
       return next({ name: 'NotFoundError' })
     }
 
-    if (user_id !== task.user_id) {
+    if (req.user.id !== task.user_id) {
       return next({ name: 'ForbiddenError' })
     }
 
