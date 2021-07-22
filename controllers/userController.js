@@ -62,6 +62,8 @@ class userController {
         return User.findOne({ where: { email } });
       })
       .then((user) => {
+        console.log("AAAAAA")
+        console.log(user)
         if (user) return user;
         statusCode = 201;
         return User.create({
@@ -70,6 +72,8 @@ class userController {
         });
       })
       .then((user) => {
+        console.log("BBBBBB")
+        console.log(user)
         const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
         res.status(statusCode).json({ access_token: accessToken });
       })
