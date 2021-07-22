@@ -8,7 +8,6 @@ class userController {
     const { email, password } = req.body;
     User.create({
       email,
-      password,
     })
       .then((result) => res.status(201).json(result))
       .catch((err) => {
