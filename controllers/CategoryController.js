@@ -7,7 +7,8 @@ class CategoryController {
         include: { 
           model: Task,
           include: User
-        }
+        },
+        order: ['id']
       })
 
       return res.status(200).json(categories)
