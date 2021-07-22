@@ -8,8 +8,11 @@ class userController {
     const { email, password } = req.body;
     User.create({
       email,
+      password,
     })
-      .then((result) => res.status(201).json(result))
+      .then((result) =>
+        res.status(201).json({ id: result.id, email: result.email })
+      )
       .catch((err) => {
         if (err.name === "SequelizeValidationError") {
           next({
