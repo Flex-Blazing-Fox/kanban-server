@@ -31,8 +31,8 @@ class TaskController{
         })
     }
     static addTask(req, res, next){
-        const {title} = req.body
-        Task.create({title, userId: req.userId})
+        const {title, category} = req.body
+        Task.create({title, category, userId: req.userId})
         .then(result => {
             res.status(201).json(result)
         })
