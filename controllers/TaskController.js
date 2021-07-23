@@ -29,7 +29,7 @@ class TaskController {
         user_id,
         organization_id,
       })
-
+      
       return res.status(201).json({ task })
     } catch (err) {
       return next(err)
