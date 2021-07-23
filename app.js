@@ -3,7 +3,7 @@ if(process.env.NODE_ENV !== 'production'){
 }
 
 const express = require('express')
-const errHandler = require('../fancy-todo-server/middleware/errHandler')
+const errHandler = require('./middleware/errHandler')
 const app = express()
 const router = require('./router')
 const PORT = process.env.PORT || 3000
