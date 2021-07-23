@@ -36,7 +36,7 @@ const authorization = (req, res, next)=>{
     })
     .then(result=>{
         if(!result){
-            throw {name: 'TASK_NOT_FOUND'}
+            throw {name: 'ACCESS_DENIED'}
         }else{
             req.task = result
             next()

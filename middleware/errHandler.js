@@ -2,6 +2,10 @@ const errHandler = (err, req, res, next)=>{
     let statusCode
     let errorMessage
     switch(err.name){
+        case'ACCESS_DENIED' : 
+            statusCode = 404
+            errorMessage = {message: "Access Denied"}
+            break
         case'TASK_NOT_FOUND' : 
             statusCode = 404
             errorMessage = {message: "Task Not Found"}
