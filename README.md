@@ -25,6 +25,7 @@ npm run dev
 ***BASE URL:***
 ```
 http://127.0.0.1:3000
+https://kanban-server-9.herokuapp.com
 ```
 
 ## Register User
