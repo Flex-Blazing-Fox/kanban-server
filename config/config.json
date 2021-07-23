@@ -14,9 +14,9 @@
     "dialect": "postgres"
   },
   "production": {
-    "use_env_varibale" : "DATABASE_URL",
-    "dialectOptions":{
-      "ssl":{
+    use_env_variable: "DATABASE_URL",
+    "dialectOptions": {
+      "ssl": {
         "rejectUnauthorized": false
       }
     }
