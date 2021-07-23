@@ -1,8 +1,16 @@
-const { Task } = require('../models')
+const { Task, User } = require('../models')
 
 class TaskController{
     static getAllTask(req, res, next){
-        Task.findAll()
+        Task.findAll(
+            {
+                include: 'User',
+                order:[
+                    ['id', 'DESC']
+                ]
+            },
+            
+        )
             .then((tasks) => {
                 res.status(200).json(tasks)
             })
@@ -49,12 +57,11 @@ class TaskController{
         res.status(200).json(tasks)
     }
 
-    static updateTask(req, res, next){
-        const { title, category } = req.body
+    static updateTitle(req, res, next){
+        const { title } = req.body
         const { tasks } = req
 
         tasks.title = title
-        tasks.category = category
 
         tasks
         .save()
@@ -69,7 +76,7 @@ class TaskController{
     static updateCategory(req, res, next){
         const { category } = req.body
         const { tasks } = req
-
+        console.log(category);
         tasks.category = category
 
         tasks

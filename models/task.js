@@ -15,18 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   Task.init({
     title: {
-      allowNull:false,
       type:DataTypes.STRING,
-      validate:{
-        notEmpty:{
-          args:true,
-          msg:"Title Tidak boleh kosong"
-        },
-        notNull:{
-          args:true,
-          msg:"Title Tidak boleh null"
-        }
-      }
     },
     category: {
       allowNull:false,

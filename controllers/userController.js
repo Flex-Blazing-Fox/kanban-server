@@ -1,14 +1,14 @@
 const { User } = require('../models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const { OAtuh2Client } = require('google-auth-library')
-const client = new OAtuh2Client(process.env.GOOLGE_CLIENT_ID)
+const { OAuth2Client } = require('google-auth-library')
+const client = new OAuth2Client(process.env.GOOLGE_CLIENT_ID)
 
 class UserController{
     static register(req, res, next){
-        const { email, password } = req.body
+        const { fullname, email, password } = req.body
 
-        User.create({email,password})
+        User.create({fullname, email,password})
             .then(() => {
                 res.status(201).json({"message":"Pendaftaran Berhasil"})
             })
@@ -44,6 +44,7 @@ class UserController{
 
         let email
         let statusCode = 200
+        let fullname
 
         client.verifyIdToken({
             idToken,
@@ -51,7 +52,7 @@ class UserController{
         })
             .then((ticket) => {
                 email = ticket.getPayload().email
-
+                fullname = ticket.getPayload().name
                 return User.findOne({where:{email}})
             })
             .then(user => {
@@ -61,6 +62,7 @@ class UserController{
 
                 statusCode = 201
                 return User.create({
+                    fullname,
                     email,
                     password:process.env.DEFAULT_PASSWORD
                 })

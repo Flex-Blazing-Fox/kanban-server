@@ -17,7 +17,7 @@ const errorHandler = (err, req, res, next) => {
             break;
         case 'TASK_NOT_FOUND':
             statusCode = 404
-            error.push({"message":"Tak Not Found"})
+            error.push({"message":"Task Not Found"})
             break;
         case 'USER_DATA_NOT_FOUND':
             statusCode = 404

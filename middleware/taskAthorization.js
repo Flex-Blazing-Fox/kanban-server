@@ -3,7 +3,6 @@ const { Task } = require('../models')
 const authorization = (req, res, next) => {
 
     const { id } = req.params
-    
     Task.findOne({
         where: {id, userId:req.userId}
     })
