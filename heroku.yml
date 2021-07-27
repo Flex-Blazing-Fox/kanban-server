@@ -1,0 +1,9 @@
+build:
+  docker:
+    web: Dockerfile
+release:
+  image: web
+  command:
+    - bash deployment-task.sh 
+run:
+  web: node index.js       
