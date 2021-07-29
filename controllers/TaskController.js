@@ -4,7 +4,7 @@ class TaskController{
     static getAll (req, res, next) {
         Task.findAll()
         .then(task => {
-            res.status(200).json({data: task})
+            res.status(200).json(task)
         })
         .catch(err => {
             next(err)
@@ -33,12 +33,12 @@ class TaskController{
     
     static putTask(req, res, next) {
         const {task} = req
-        const {title,category} = req.body
-        task.dataValues.category = category
-        task.dataValues.title = title
+        const {title} = req.body
+        task.title = title
         task.save()
-        .then(task => {
-            res.status(200).json({data: task})
+        .then(result => {
+            console.log(task.title,"sudah ter put2")
+            res.status(200).json({data : result})
         })
         .catch(err => {
             next(err)
@@ -48,10 +48,10 @@ class TaskController{
     static patchTask(req, res, next) {
         const {task} = req
         const {category} = req.body
-        task.dataValues.category = category
+        task.category = category
         task.save()
-        .then(task => {
-            res.status(200).json({data: task})
+        .then(result => {
+            res.status(200).json({data : result})
         })
         .catch(err => {
             next(err)

@@ -18,6 +18,8 @@ const authentication = (req, res, next) => {
         .catch(err => {
             next(err)
         })
+        // req.userId = decoded.id
+        // next()
     }
     catch(err) {
         next( {name: "Invalid access_token"})

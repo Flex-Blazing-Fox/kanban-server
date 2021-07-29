@@ -28,6 +28,10 @@ const errorHandler = (err, req, res, next) => {
         statusCode = 404;
         errors.push('Task not found');
         break;
+      case 'JsonWebTokenError':
+        statusCode = 404;
+        errors.push('User not found');
+        break;
       case 'SequelizeUniqueConstraintError':
         statusCode = 409;
         errors.push('Email has been used');
